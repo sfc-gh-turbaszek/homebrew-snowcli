@@ -18,11 +18,6 @@
       sha256 "9b469f3a900bf28dc19b8cfbf8019bf47f7fdd1a65a1d4ffb98fc14166beb4d1"
     end
 
-    resource "cffi" do
-      url "https://files.pythonhosted.org/packages/68/ce/95b0bae7968c65473e1298efb042e10cafc7bafc14d9e4f154008241c91d/cffi-1.16.0.tar.gz"
-      sha256 "bcb3ef43e58665bbda2fb198698fcae6776483e0c4a631aa5647806c25e02cc0"
-    end
-
     resource "charset-normalizer" do
       url "https://files.pythonhosted.org/packages/63/09/c1bc53dab74b1816a00d8d030de5bf98f724c52c1635e07681d312f20be8/charset-normalizer-3.3.2.tar.gz"
       sha256 "f30c3cb33b24454a82faecaf01b19c18562b1e89558fb6c56de4d9118a032fd5"
@@ -188,11 +183,6 @@
       sha256 "dceeb6c0028fdb6734471eb07c0cd2aae706ccaecab45965ee83f11c8d3b1f62"
     end
 
-    resource "snowflake-cli-labs" do
-      url "https://files.pythonhosted.org/packages/45/8a/1d7eb85f6aca8d5a3e6a420ad77cf5deec0442d26b19e10c826979ccafe9/snowflake_cli_labs-1.2.4.tar.gz"
-      sha256 "063cfb5174fdb173ae1d8f0066347194546268fa6d9db63edac63a61d983ec9f"
-    end
-
     resource "snowflake-connector-python" do
       url "https://files.pythonhosted.org/packages/fb/14/7818fdca8f5857521b005720662de43ba4a4d85f0633f8df5a14729dff6e/snowflake-connector-python-3.2.0.tar.gz"
       sha256 "676a0dca16de7c120900aa1a5fce6440833b0a60f76682b7ccf1667967282ca3"
@@ -239,30 +229,9 @@
     end
 
 
-
     def install
-      ENV["CARGO_NET_GIT_FETCH_WITH_CLI"] = "true"
-      #without_pip=false because of https://github.com/Homebrew/brew/pull/15792
-      venv = virtualenv_create(libexec, "python3", system_site_packages: false, without_pip: false)
-      venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/python",
-        "-m", "pip", "install", "pip==22.3.1"
-      resources.each do |r|
-        if r.name == "snowflake-connector-python" or r.name == "snowflake-connector-python-nightly"
-          # workaround for installing `snowflake-connector-python`
-          # package w/o build-system deps (e.g. pyarrow)
-          # adds the `--no-use-pep517` parameter
-          # learned from dbt-homebrew
-          r.stage do
-            venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/pip", "install",
-              "-v", "--no-deps", "--no-binary", ":all:", "--ignore-installed", "--no-use-pep517", Pathname.pwd
-          end
-        else
-          venv.pip_install r
-        end
-      end
-    venv.pip_install_and_link buildpath
-
-    bin.install_symlink "#{libexec}/bin/snow" => "snow"
+      virtualenv_install_with_resources
+      bin.install_symlink "#{libexec}/bin/snow" => "snow"
     end
 
     test do
