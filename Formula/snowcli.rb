@@ -109,8 +109,8 @@
 
     def install
       venv = virtualenv_create(libexec, "python3", system_site_packages: true, without_pip: false)
-      venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/python",
-        "-m", "pip", "install", "pip==22.3.1"
+      # venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/python",
+      #   "-m", "pip", "install", "pip==22.3.1"
       resources.each do |r|
         if r.name == "snowflake-connector-python" or r.name == "snowflake-connector-python-nightly"
           # workaround for installing `snowflake-connector-python` package w/o build-system deps (e.g. pyarrow)
