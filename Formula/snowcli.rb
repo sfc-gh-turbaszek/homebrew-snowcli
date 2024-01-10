@@ -117,10 +117,14 @@
           # adds the `--no-use-pep517` parameter learned from dbt-homebrew
           r.stage do
             venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/pip", "install",
-              "-v", "--no-deps", "--no-binary", ":all:", "--ignore-installed", "--no-use-pep517", Pathname.pwd
+              "--disable-pip-version-check", "--no-deps", "--no-binary", ":all:", "--ignore-installed", "--no-use-pep517", Pathname.pwd
           end
         else
-          venv.pip_install r
+          # Avoid pip version check on every install
+          r.stage do
+            venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/pip", "install",
+              "--disable-pip-version-check", ":all:", Pathname.pwd
+          end
         end
       end
     venv.pip_install_and_link buildpath
