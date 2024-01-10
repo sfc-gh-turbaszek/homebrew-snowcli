@@ -11,7 +11,6 @@
     depends_on "python-asn1crypto"
     depends_on "python-certifi"
     depends_on "python-click"
-    depends_on "python-coverage"
     depends_on "python-cryptography"
     depends_on "python-filelock"
     depends_on "python-jinja"
@@ -43,6 +42,11 @@
     resource "charset-normalizer" do
       url "https://files.pythonhosted.org/packages/2a/53/cf0a48de1bdcf6ff6e1c9a023f5f523dfe303e4024f216feac64b6eb7f67/charset-normalizer-3.2.0.tar.gz"
       sha256 "3bb3d25a8e6c0aedd251753a79ae98a093c7e7b471faa3aa9a93a81431987ace"
+    end
+
+    resource "coverage" do
+      url "https://files.pythonhosted.org/packages/29/73/f584ffd3acea29a2f2330bb8fd0c14af3f0efd03f73c696a6f229199198e/coverage-7.3.1.tar.gz"
+      sha256 "6cb7fe1581deb67b782c153136541e20901aa312ceedaf1467dcb35255787952"
     end
 
     resource "importlib-metadata" do
