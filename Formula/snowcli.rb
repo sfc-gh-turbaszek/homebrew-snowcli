@@ -12,6 +12,7 @@
     depends_on "python-certifi"
     depends_on "python-click"
     depends_on "python-cryptography"
+    depends_on "python-dateutil"
     depends_on "python-filelock"
     depends_on "python-jinja"
     depends_on "python-markupsafe"
@@ -26,10 +27,19 @@
     depends_on "python-typing-extensions"
     depends_on "python-urllib3"
     
-
     resource "coverage" do
       url "https://files.pythonhosted.org/packages/29/73/f584ffd3acea29a2f2330bb8fd0c14af3f0efd03f73c696a6f229199198e/coverage-7.3.1.tar.gz"
       sha256 "6cb7fe1581deb67b782c153136541e20901aa312ceedaf1467dcb35255787952"
+    end
+
+    resource "gitdb" do
+      url "https://files.pythonhosted.org/packages/19/0d/bbb5b5ee188dec84647a4664f3e11b06ade2bde568dbd489d9d64adef8ed/gitdb-4.0.11.tar.gz"
+      sha256 "bf5421126136d6d0af55bc1e7c1af1c397a34f5b7bd79e776cd3e89785c2b04b"
+    end
+
+    resource "GitPython" do
+      url "https://files.pythonhosted.org/packages/c6/33/5e633d3a8b3dbec3696415960ed30f6718ed04ef423ce0fbc6512a92fa9a/GitPython-3.1.37.tar.gz"
+      sha256 "f9b9ddc0761c125d5780eab2d64be4873fc6817c2899cbcb34b02344bdc7bc54"
     end
 
     resource "importlib-metadata" do
@@ -57,9 +67,19 @@
       sha256 "6f5fef59cb5b3708321db7cca56aed8ad7e662853351e7991fcf60ec606d47a4"
     end
     
+    resource "pycparser" do
+      url "https://files.pythonhosted.org/packages/5e/0b/95d387f5f4433cb0f53ff7ad859bd2c6051051cebbb564f139a999ab46de/pycparser-2.21.tar.gz"
+      sha256 "e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206"
+    end
+
+    resource "pluggy" do
+      url "https://files.pythonhosted.org/packages/36/51/04defc761583568cae5fd533abda3d40164cbdcf22dee5b7126ffef68a40/pluggy-1.3.0.tar.gz"
+      sha256 "cf61ae8f126ac6f7c451172cf30e3e43d3ca77615509771b3a984a0730651e12"
+    end
+
     resource "pycryptodomex" do
-      url "https://files.pythonhosted.org/packages/40/92/efd675dba957315d705f792b28d900bddc36f39252f6713961b4221ee9af/pycryptodomex-3.18.0.tar.gz"
-      sha256 "3e3ecb5fe979e7c1bb0027e518340acf7ee60415d79295e5251d13c68dde576e"
+      url "https://files.pythonhosted.org/packages/3f/13/84f2aea851d75e12e7f32ccc11a00f1defc3d285b4ed710e5d049f31c5a6/pycryptodomex-3.19.1.tar.gz"
+      sha256 "0b7154aff2272962355f8941fd514104a88cb29db2d8f43a29af900d6398eb1c"
     end
 
     resource "Pygments" do
@@ -103,14 +123,12 @@
     end
 
     resource "zipp" do
-      url "https://files.pythonhosted.org/packages/e2/45/f3b987ad5bf9e08095c1ebe6352238be36f25dd106fde424a160061dce6d/zipp-3.16.2.tar.gz"
-      sha256 "ebc15946aa78bd63458992fc81ec3b6f7b1e92d51c35e6de1c3804e73b799147"
+      url "https://files.pythonhosted.org/packages/58/03/dd5ccf4e06dec9537ecba8fcc67bbd4ea48a2791773e469e73f94c3ba9a6/zipp-3.17.0.tar.gz"
+      sha256 "84e64a1c28cf7e91ed2078bb8cc8c259cb19b76942096c8d7b84947690cabaf0"
     end
 
     def install
       venv = virtualenv_create(libexec, "python3", system_site_packages: true, without_pip: false)
-      # venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/python",
-      #   "-m", "pip", "install", "pip==22.3.1"
       resources.each do |r|
         if r.name == "snowflake-connector-python" or r.name == "snowflake-connector-python-nightly"
           # workaround for installing `snowflake-connector-python` package w/o build-system deps (e.g. pyarrow)
