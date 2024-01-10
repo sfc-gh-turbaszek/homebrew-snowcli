@@ -20,17 +20,10 @@
     depends_on "python-platformdirs"
     depends_on "python-charset-normalizer"
     depends_on "python-markdown"
-    depends_on "python-pycparser"
-    depends_on "python-Pygments"
-    depends_on "python-PyJWT"
-    depends_on "python-pyOpenSSL"
-    depends_on "python-pytz"
+    depends_on "python-markdown-it-py"
     depends_on "python-requests"
-    depends_on "python-requirements"
     depends_on "python-rich"
-    depends_on "python-typer"
-    depends_on "python-types"
-    depends_on "python-typing"
+    depends_on "python-typing-extensions"
     depends_on "python-urllib3"
     
 
@@ -54,11 +47,6 @@
       sha256 "ba2e15a9b35e21908d0aaf4e0a47acc52d6ae33444df0da2b49d41a46ef6d678"
     end
 
-    resource "markdown-it-py" do
-      url "https://files.pythonhosted.org/packages/38/71/3b932df36c1a044d397a1f92d1cf91ee0a503d91e470cbd670aa66b07ed0/markdown-it-py-3.0.0.tar.gz"
-      sha256 "e3f60a94fa066dc52ec76661e37c851cb232d92f9886b15cb560aaada2df8feb"
-    end
-
     resource "more-itertools" do
       url "https://files.pythonhosted.org/packages/b7/56/7daf104a9cb6af39c00127aee6904b01040dbb12cf1ceedd6a087c097055/more-itertools-10.0.0.tar.gz"
       sha256 "cd65437d7c4b615ab81c0640c0480bc29a550ea032891977681efd28344d51e1"
@@ -72,6 +60,21 @@
     resource "pycryptodomex" do
       url "https://files.pythonhosted.org/packages/40/92/efd675dba957315d705f792b28d900bddc36f39252f6713961b4221ee9af/pycryptodomex-3.18.0.tar.gz"
       sha256 "3e3ecb5fe979e7c1bb0027e518340acf7ee60415d79295e5251d13c68dde576e"
+    end
+
+    resource "Pygments" do
+      url "https://files.pythonhosted.org/packages/55/59/8bccf4157baf25e4aa5a0bb7fa3ba8600907de105ebc22b0c78cfbf6f565/pygments-2.17.2.tar.gz"
+      sha256 "da46cec9fd2de5be3a8a784f434e4c4ab670b4ff54d605c4c2717e9d49c4c367"
+    end
+
+    resource "PyJWT" do
+      url "https://files.pythonhosted.org/packages/30/72/8259b2bccfe4673330cea843ab23f86858a419d8f1493f66d413a76c7e3b/PyJWT-2.8.0.tar.gz"
+      sha256 "57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de"
+    end
+
+    resource "pyOpenSSL" do
+      url "https://files.pythonhosted.org/packages/bf/a0/e667c3c43b65a188cc3041fa00c50655315b93be45182b2c94d185a2610e/pyOpenSSL-23.3.0.tar.gz"
+      sha256 "6b2cba5cc46e822750ec3e5a81ee12819850b11303630d575e98108a079c2b12"
     end
 
     resource "requirements-parser" do
