@@ -123,7 +123,7 @@
           # Avoid pip version check on every install
           r.stage do
             venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/pip", "install",
-              "--disable-pip-version-check", ":all:", Pathname.pwd
+              "--disable-pip-version-check", Pathname.pwd
           end
         end
       end
