@@ -18,7 +18,7 @@
     depends_on "python-idna"
     depends_on "python-mdurl"
     depends_on "python-platformdirs"
-    depends_on "python-charset"
+    depends_on "python-charset-normalizer"
     depends_on "python-keyring"
     depends_on "python-markdown"
     depends_on "python-more"
@@ -38,11 +38,6 @@
     depends_on "python-typing"
     depends_on "python-urllib3"
     
-
-    resource "charset-normalizer" do
-      url "https://files.pythonhosted.org/packages/2a/53/cf0a48de1bdcf6ff6e1c9a023f5f523dfe303e4024f216feac64b6eb7f67/charset-normalizer-3.2.0.tar.gz"
-      sha256 "3bb3d25a8e6c0aedd251753a79ae98a093c7e7b471faa3aa9a93a81431987ace"
-    end
 
     resource "coverage" do
       url "https://files.pythonhosted.org/packages/29/73/f584ffd3acea29a2f2330bb8fd0c14af3f0efd03f73c696a6f229199198e/coverage-7.3.1.tar.gz"
