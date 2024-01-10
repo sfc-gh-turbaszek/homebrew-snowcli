@@ -107,20 +107,14 @@
       sha256 "ebc15946aa78bd63458992fc81ec3b6f7b1e92d51c35e6de1c3804e73b799147"
     end
 
-
-
     def install
-      # ENV["CARGO_NET_GIT_FETCH_WITH_CLI"] = "true"
-      #without_pip=false because of https://github.com/Homebrew/brew/pull/15792
-      venv = virtualenv_create(libexec, "python3", system_site_packages: false, without_pip: false)
+      venv = virtualenv_create(libexec, "python3", system_site_packages: true, without_pip: false)
       venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/python",
         "-m", "pip", "install", "pip==22.3.1"
       resources.each do |r|
         if r.name == "snowflake-connector-python" or r.name == "snowflake-connector-python-nightly"
-          # workaround for installing `snowflake-connector-python`
-          # package w/o build-system deps (e.g. pyarrow)
-          # adds the `--no-use-pep517` parameter
-          # learned from dbt-homebrew
+          # workaround for installing `snowflake-connector-python` package w/o build-system deps (e.g. pyarrow)
+          # adds the `--no-use-pep517` parameter learned from dbt-homebrew
           r.stage do
             venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/pip", "install",
               "-v", "--no-deps", "--no-binary", ":all:", "--ignore-installed", "--no-use-pep517", Pathname.pwd
