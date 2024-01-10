@@ -20,8 +20,6 @@
     depends_on "python-platformdirs"
     depends_on "python-charset-normalizer"
     depends_on "python-markdown"
-    depends_on "python-oscrypto"
-    depends_on "python-packaging"
     depends_on "python-pycparser"
     depends_on "python-Pygments"
     depends_on "python-PyJWT"
@@ -30,7 +28,6 @@
     depends_on "python-requests"
     depends_on "python-requirements"
     depends_on "python-rich"
-    depends_on "python-tomlkit"
     depends_on "python-typer"
     depends_on "python-types"
     depends_on "python-typing"
@@ -67,6 +64,11 @@
       sha256 "cd65437d7c4b615ab81c0640c0480bc29a550ea032891977681efd28344d51e1"
     end
 
+    resource "oscrypto" do
+      url "https://files.pythonhosted.org/packages/06/81/a7654e654a4b30eda06ef9ad8c1b45d1534bfd10b5c045d0c0f6b16fecd2/oscrypto-1.3.0.tar.gz"
+      sha256 "6f5fef59cb5b3708321db7cca56aed8ad7e662853351e7991fcf60ec606d47a4"
+    end
+    
     resource "pycryptodomex" do
       url "https://files.pythonhosted.org/packages/40/92/efd675dba957315d705f792b28d900bddc36f39252f6713961b4221ee9af/pycryptodomex-3.18.0.tar.gz"
       sha256 "3e3ecb5fe979e7c1bb0027e518340acf7ee60415d79295e5251d13c68dde576e"
@@ -85,6 +87,16 @@
     resource "sortedcontainers" do
       url "https://files.pythonhosted.org/packages/e8/c4/ba2f8066cceb6f23394729afe52f3bf7adec04bf9ed2c820b39e19299111/sortedcontainers-2.4.0.tar.gz"
       sha256 "25caa5a06cc30b6b83d11423433f65d1f9d76c4c6a0c90e3379eaa43b9bfdb88"
+    end
+
+    resource "strictyaml" do
+      url "https://files.pythonhosted.org/packages/b3/08/efd28d49162ce89c2ad61a88bd80e11fb77bc9f6c145402589112d38f8af/strictyaml-1.7.3.tar.gz"
+      sha256 "22f854a5fcab42b5ddba8030a0e4be51ca89af0267961c8d6cfa86395586c407"
+    end
+
+    resource "tomlkit" do
+      url "https://files.pythonhosted.org/packages/0d/07/d34a911a98e64b07f862da4b10028de0c1ac2222ab848eaf5dd1877c4b1b/tomlkit-0.12.1.tar.gz"
+      sha256 "38e1ff8edb991273ec9f6181244a6a391ac30e9f5098e7535640ea6be97a7c86"
     end
 
     resource "zipp" do
